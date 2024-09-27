@@ -5,8 +5,8 @@
   <h1>Data Guru</h1>
   <nav>
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-      <li class="breadcrumb-item active">Dashboard</li>
+      <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+      <li class="breadcrumb-item"><a href="{{ route('dataguru.index') }}">Data Guru</a></li>
     </ol>
   </nav>
 </div>
@@ -55,7 +55,7 @@
                 <tr>
                   <td class="text-center">{{ $loop->iteration }}</td>
                   <td>
-                    <img src="{{ asset($guru->guru_foto ? 'storage/foto_guru/' . $guru->guru_foto : 'storage/foto_guru/profile.jpg') }}" alt="Guru" class="rounded-circle" style="width: 35px; height: 35px;"> 
+                    <img src="{{ asset($guru->guru_foto ? 'storage/foto_guru/' . $guru->guru_foto : 'img/profile.jpg') }}" alt="Guru" class="rounded-circle" style="width: 35px; height: 35px;"> 
                   </td>
                   <td class="align-middle">{{ $guru->guru_nama }}</td>
                   <td class="flex flex-column align-middle">

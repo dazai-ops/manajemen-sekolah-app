@@ -26,18 +26,18 @@
           </a>
         </li>
         <li>
+          <a href="{{ route('datasiswa.index') }}" class="{{ request()->routeIs('datasiswa.*') ? 'active' : ''}}">
+            <i class="bi bi-circle"></i><span>Siswa</span>
+          </a>
+        </li>
+        <li>
           <a href="{{ route('datamapel.index') }}" class="{{ request()->routeIs('datamapel.*') ? 'active' : '' }}">
             <i class="bi bi-circle"></i><span>Mapel</span>
           </a>
         </li>
         <li>
-          <a href="#">
-            <i class="bi bi-circle"></i><span>Siswa</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="bi bi-circle"></i><span>Jadwal</span>
+          <a href="{{ route('jadwal-pelajaran.index') }}" class="{{ request()->routeIs('jadwal-pelajaran.*') ? 'active' : '' }}">
+            <i class="bi bi-circle"></i><span>Jadwal Pelajaran</span>
           </a>
         </li>
       </ul>

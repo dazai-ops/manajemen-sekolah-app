@@ -17,7 +17,7 @@
       <div class="card">
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
-            <a href="{{ route('dataguru.create') }}" class="btn btn-outline-primary">
+            <a href="{{ route('datasiswa.create') }}" class="btn btn-outline-primary">
               <i class="bi bi-plus"></i>
               Tambah Siswa
             </a>
@@ -30,33 +30,28 @@
                 <th>Foto</th>
                 <th>Nama</th>
                 <th>Kelas</th>
+                <th>Jenis Kelamin</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              @foreach ($dataSiswa as $guru)    
+              @foreach ($dataSiswa as $siswa)    
                 <tr>
                   <td class="text-center">{{ $loop->iteration }}</td>
                   <td>
-                    <img src="{{ asset($guru->guru_foto ? 'storage/foto_guru/' . $guru->guru_foto : 'storage/foto_guru/profile.jpg') }}" alt="Guru" class="rounded-circle" style="width: 35px; height: 35px;"> 
+                    <img src="{{ asset($siswa->siswa_foto ? 'storage/foto_siswa/' . $siswa->siswa_foto : 'img/profile.jpg') }}" alt="Guru" class="rounded-circle" style="width: 35px; height: 35px;"> 
                   </td>
-                  <td class="align-middle">{{ $guru->guru_nama }}</td>
-                  <td class="flex flex-column align-middle">
-                    @foreach ($guru->mapel as $mapel)
-                      @php
-                        $warna = $warnaMapel[$mapel->id] ?? 'bg-primary';
-                      @endphp
-                      <span class="badge {{ $warna }}">{{ $mapel->mapel_nama }}</span>
-                    @endforeach
-                  </td>
+                  <td class="align-middle">{{ $siswa->siswa_nama }}</td>
+                  <td class="align-middle">{{ $siswa->kelas->kelas_nama }}</td>
+                  <td class="align-middle">{{ $siswa->siswa_jenis_kelamin }}</td>
                   <td class="d-flex gap-1 align-middle">
-                    <a href="{{ route('dataguru.edit', $guru->id) }}" class="btn btn-warning">
+                    <a href="{{ route('datasiswa.edit', $siswa->id) }}" class="btn btn-warning">
                       <i class="bi bi-pencil-fill"></i>
                     </a>
-                    <button type="button" class="btn btn-info guru-button-detail-info" data-bs-toggle="modal" data-bs-target="#guru-modal-detail-info" data-id={{ $guru->id }}>
+                    <button type="button" class="btn btn-info siswa-button-detail-info" data-bs-toggle="modal" data-bs-target="#siswa-modal-detail-info" data-id={{ $siswa->id }}>
                       <i class="bi bi-info-circle"></i>
                     </button>
-                    <a href="{{ route('dataguru.destroy', $guru->id) }}" class="btn btn-danger" data-confirm-delete="true">
+                    <a href="{{ route('datasiswa.destroy', $siswa->id) }}" class="btn btn-danger" data-confirm-delete="true">
                       <i class="bi bi-trash-fill"></i>
                     </a>
                   </td>
@@ -68,6 +63,6 @@
       </div>
     </div>
 </div>
-@include('operator_dataguru.modal')
-@include('operator_dataguru.proses')
+@include('operator_datasiswa.modal')
+@include('operator_datasiswa.proses')
 @endsection

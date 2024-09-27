@@ -12,9 +12,13 @@ class Guru extends Model
     protected $guarded = ['id'];
     protected $primaryKey = 'id';
 
-    public function mapel()
-    {
+    public function mapel(){
         return $this->belongsToMany(Mapel::class, 'guru_mapel');
     }
+
+    public function jadwal_list(){
+        return $this->hasMany(JadwaList::class);
+    }
+
 
 }

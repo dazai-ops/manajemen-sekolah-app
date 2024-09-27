@@ -6,6 +6,8 @@ use App\Http\Controllers\GuruController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\JadwalListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,4 +42,9 @@ Route::middleware('operator.auth')->group(function (){
     Route::resource('/dataguru', GuruController::class);
     // Mapel
     Route::resource('/datamapel', MapelController::class);
+    // Siswa
+    Route::resource('/datasiswa', SiswaController::class);
+    // Jadwal
+    Route::resource('/jadwal-pelajaran', JadwalListController::class);
+    Route::get('/jadwal-pelajaran-list/{id}', [JadwalListController::class, 'jadwal_list']);
 });
