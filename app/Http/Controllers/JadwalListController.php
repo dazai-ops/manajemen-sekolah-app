@@ -39,8 +39,28 @@ class JadwalListController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        // dd($request);
+        try{
+            $jadwalList = new JadwalList();
+            $jadwalList->guru_id = $request->input('guru');
+            $jadwalList->kelas_id = $request->input('kelas');
+            $jadwalList->mapel_id = $request->input('mapel');
+            $jadwalList->hari = $request->input('hari');
+            $jadwalList->jam_mulai = $request->input('jam_mulai');
+            $jadwalList->jam_selesai = $request->input('jam_selesai');
+
+            $jadwalList->save();
+            Alert::success('Berhasil', 'Jadwal berhasil ditambahkan');
+            return response()->json([
+                'success' => true,
+                'message' => 'Jadwal berhasil ditambahkan',
+                'data' => $jadwalList
+            ]);
+
+        }catch(\Excption $e){
+            Alert::error('Gagal', 'Jadwal gagal ditambahkan');
+        }
     }
 
     /**
@@ -52,12 +72,13 @@ class JadwalListController extends Controller
         $jadwal = JadwalList::with(['guru', 'mapel', 'kelas'])
             ->where('kelas_id', $kelas_id)
             ->whereIn('hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'])
+            ->orderBy('jam_mulai', 'asc')
             ->get();
 
         return view('operator_jadwal-pelajaran.show', [
             'jadwal' => $jadwal,
             'kelas' => $kelas,
-            'pageTitle' => 'Jadwal Pelajaran', // Assign the page title
+            'pageTitle' => $kelas->kelas_nama, // Assign the page title
         ]);
     }
 
@@ -66,12 +87,14 @@ class JadwalListController extends Controller
      */
     public function edit($kelas_id)
     {   
+
         $dataMapel = Mapel::all();
         $dataGuru = Guru::all();
         $kelas = Kelas::find($kelas_id);
         $jadwal = JadwalList::with(['guru', 'mapel', 'kelas'])
             ->where('kelas_id', $kelas_id)
             ->whereIn('hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'])
+            ->orderBy('jam_mulai', 'asc')
             ->get();
 
         return view('operator_jadwal-pelajaran.edit', [
@@ -109,13 +132,15 @@ class JadwalListController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, string $id)
+    public function destroy(string $id)
     {   
-        $kelas = $request->kelas_id;
-        $jadwalList = JadwalList::findOrFail($id);
-        $jadwalList->delete();
-        Alert::success('Berhasil', 'Data jadwal berhasil dihapus');
-        return redirect("/jadwal-pelajaran/{$kelas}/edit");
+        try {
+            $jadwal = JadwalList::findOrFail($id);
+            $jadwal->delete();
+            return response()->json(['success' => 'Jadwal berhasil dihapus!']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Terjadi kesalahan saat menghapus jadwal!'], 500);
+        }
     }
 
     public function jadwal_list($id){

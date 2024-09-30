@@ -15,12 +15,10 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
-          <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
+          <div class="d-flex justify-content-start align-items-center mt-4 mb-3">
             <a href="{{ route('dataoperator.create') }}" class="btn btn-outline-primary">
               <i class="bi bi-plus"></i>Tambah Operator
             </a>
-            <h1></h1>
-            {{-- <span class="badge bg-primary">Primary</span> --}}
           </div>
           <table id="initDataTable" class="table" style="width:100%">
             <thead>

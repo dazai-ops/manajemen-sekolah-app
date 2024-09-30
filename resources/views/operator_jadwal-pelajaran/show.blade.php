@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="pagetitle">
-  <h1>Dashboard</h1>
+  <h1>Jadwal Pelajaran Kelas: {{ $kelas->kelas_nama }}</h1>
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
@@ -11,10 +11,27 @@
   </nav>
 </div><!-- End Page Title -->
 {{-- {{$jadwal}} --}}
+{{-- <div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Default Breadcrumbs</h5>
+  
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Library</a></li>
+        <li class="breadcrumb-item active">Default</li>
+      </ol>
+    </nav>
+  </div>
+</div> --}}
 <div class="section dashboard">
   <div class="row">
-    <div class="d-flex justify-content-between">
-      <h1>Jadwal untuk kelas: {{$kelas->kelas_nama}}</h1>
+    <div class="d-flex justify-content-start mb-3 gap-2">
+      <a href="{{route('jadwal-pelajaran.index')}}" class="btn btn-info my-auto">
+        <i class="bi bi-bar-chart-line"></i>
+        Lihat Jadwal Lain
+      </a>
+      {{-- <h1>Jadwal untuk kelas: {{$kelas->kelas_nama}}</h1> --}}
       <a href="{{route('jadwal-pelajaran.edit', $kelas->id)}}" class="btn btn-warning my-auto">
         <i class="bi bi-pencil-fill"></i>
         Edit Jadwal

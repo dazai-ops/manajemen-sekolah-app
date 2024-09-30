@@ -1,17 +1,40 @@
 <script>
 
+  function swallConfirmSave(icon, title, form){
+    Swal.fire({
+        title: title,
+        icon: icon,
+        showCancelButton: true,
+        confirmButtonText: 'Yakin',
+        cancelButtonText: 'Batal'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          form.submit();
+        }
+      });
+  }
+  $(document).ready(function() {
+    $('#guru-form-tambah').on('submit', function(e) {
+      e.preventDefault();
+      const form = this
+      swallConfirmSave('info', 'Yakin tambah data ini?', form)
+    });
+
+    $('#guru-form-edit').on('submit', function(e) {
+      e.preventDefault();
+      const form = this
+      swallConfirmSave('info', 'Yakin mengubah data ini', form)
+    });
+  });
+
   $(document).ready(function() {
     $('.guru-button-detail-info').on('click', function(){
-      console.log('clicked')
       var guruId = $(this).data('id')
-      
-      console.log('clicked', guruId)
 
       $.ajax({
         url: '/dataguru/' + guruId,
         method: 'GET',
         success: function(response){
-          console.log(response)
           $('#guru-info-nama').text(response.data.detail_guru.guru_nama)
           $('#guru-info-nip').text(response.data.detail_guru.guru_nip)
           $('#guru-info-tempat-lahir').text(response.data.detail_guru.guru_tempat_lahir)
@@ -29,10 +52,10 @@
   })
 
   function previewImage(){
-    const image = document.querySelector('#guru_foto');
-    const imagePreview = document.querySelector('#image_preview');
+    const image = document.querySelector('#guru-foto');
+    const imagePreview = document.querySelector('#image-preview');
     const buttonPreview = document.querySelector('#btn-preview-image');
-    const buttonRemove = document.querySelector('#remove-preview-image');
+    const buttonRemove = document.querySelector('#btn-remove-preview-image');
 
     if(image.files && image.files[0]){
       buttonPreview.style.display = 'inline';
@@ -50,12 +73,12 @@
   }
 
   function removePreviewImage(){
-    document.getElementById('guru_foto').value = '';
-    const imagePreview = document.getElementById('image_preview');
+    document.getElementById('guru-foto').value = '';
+    const imagePreview = document.getElementById('image-preview');
     imagePreview.src = '';
 
     const buttonPreview = document.querySelector('#btn-preview-image');
-    const buttonRemove = document.querySelector('#remove-preview-image');
+    const buttonRemove = document.querySelector('#btn-remove-preview-image');
 
     buttonPreview.style.display = 'none';
     buttonRemove.style.display = 'none';

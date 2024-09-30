@@ -5,8 +5,8 @@
   <h1>Dashboard</h1>
   <nav>
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-      <li class="breadcrumb-item active">Dashboard</li>
+      <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{{route('dataguru.index')}}">Data Guru</a></li>
     </ol>
   </nav>
 </div><!-- End Page Title -->
@@ -15,7 +15,7 @@
   <div class="row">
     <div class="card">
       <div class="card-body d-flex flex-column justify-content-center">
-        <form action="{{ route('dataguru.store') }}" method="POST" enctype="multipart/form-data" class="row g-4 mt-3">
+        <form action="{{ route('dataguru.store') }}" method="POST" id="guru-form-tambah" enctype="multipart/form-data" class="row g-4 mt-3">
           @csrf
           <div class="col-md-4">
             <label for="guru_nama" class="form-label" style="font-weight: bold">Nama Lengkap <span class="text-danger">*</span></label>
@@ -106,15 +106,15 @@
             </div>
           </div>
           <div class="col-md-12">
-            <label for="guru_foto" class="form-label" style="font-weight: bold">Foto Guru</label>
-            <input type="file" class="form-control @error('guru_foto') is-invalid @enderror" id="guru_foto" name="guru_foto" onchange="previewImage()">
+            <label for="guru-foto" class="form-label" style="font-weight: bold">Foto Guru</label>
+            <input type="file" class="form-control @error('guru_foto') is-invalid @enderror" id="guru-foto" name="guru_foto" onchange="previewImage()">
             @error('guru_foto')
               <div class="invalid-feedback">
                 {{ $message }}
               </div>
             @enderror
             <button type="button" class="btn btn-primary mt-4" id="btn-preview-image" data-bs-toggle="modal" data-bs-target="#guru-modal-image-preview" style="display: none">Preview</button>
-            <button type="button" class="btn btn-warning mt-4" id="remove-preview-image" style="display: none" onclick="removePreviewImage()">Remove</button>
+            <button type="button" class="btn btn-warning mt-4" id="btn-remove-preview-image" style="display: none" onclick="removePreviewImage()">Remove</button>
           </div>
           <div class="d-flex justify-content-end gap-2 mt-3">
             <button type="button" class="btn btn-secondary" onclick="window.history.back()">Kembali</button>

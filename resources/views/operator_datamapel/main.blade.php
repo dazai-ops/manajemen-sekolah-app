@@ -9,21 +9,18 @@
       <li class="breadcrumb-item"><a href="{{ route('datamapel.index') }}">Data Mapel</a></li>
     </ol>
   </nav>
-</div><!-- End Page Title -->
+</div>
 <div class="section dashboard">
   <div class="row">
     <div class="row">
       <div class="col-lg-12">
-    
         <div class="card">
           <div class="card-body">
-            {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mapel-tambah-mapel"></button> --}}
-            <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
+            <div class="d-flex justify-content-start align-items-center mt-4 mb-3">
               <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#mapel-modal-tambah">
                 <i class="bi bi-plus"></i>
                 Tambah Mapel
               </button>
-              <h1></h1>
             </div>
             <table id="initDataTable" class="table" style="width:100%">
               <thead>
@@ -53,11 +50,10 @@
                   </tr>
                 @endforeach
               </tbody>
-  
           </table>
-          </div>
         </div>
       </div>
+    </div>
   </div>
 </div>
 @include('operator_datamapel.modal')

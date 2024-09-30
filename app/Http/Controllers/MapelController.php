@@ -13,8 +13,8 @@ class MapelController extends Controller
      */
     public function index()
     {   
-        $title = 'Hapus data mata pelajaran!';
-        $text = "Apakah anda yakin untuk menghapus data ini?";
+        $title = 'Hapus data mata pelajaran?';
+        $text = "Data tidak dapat dikembalikan!";
         confirmDelete($title, $text);
 
         $dataMapel = Mapel::withCount('guru')->get();
@@ -29,9 +29,7 @@ class MapelController extends Controller
      */
     public function create()
     {
-        return view('operator_datamapel.create', [
-            'pageTitle' => 'Tambah Data Mapel'
-        ]);
+    
     }
 
     /**
@@ -96,9 +94,14 @@ class MapelController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-    {
-        $mapel = Mapel::findOrFail($id);
-        $mapel->delete();
-        return redirect('/datamapel')->with('success', 'Data mapel berhasil dihapus');
+    {   
+        try{
+            $mapel = Mapel::findOrFail($id);
+            $mapel->delete();
+            Alert::success('Berhasil', 'Mapel berhasil dihapus');
+            return redirect('/datamapel');
+        }catch(\Exception $e){
+            Alert::error('Gagal', 'Mapel gagal dihapus');
+        }
     }
 }

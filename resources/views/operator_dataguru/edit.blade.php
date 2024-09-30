@@ -16,7 +16,7 @@
         <div class="image-profile d-flex justify-content-center flex-column align-items-center">
           <img src="{{ asset($detailGuru->guru_foto ? 'storage/foto_guru/'.$detailGuru->guru_foto : 'img/profile.jpg') }}" alt="" class="rounded-circle mt-4 cursor-pointer" style="width: 150px; height: 150px; margin:0 auto">
         </div>
-        <form action="{{ route('dataguru.update', $detailGuru->id) }}" method="POST" enctype="multipart/form-data" class="row g-4 mt-3">
+        <form action="{{ route('dataguru.update', $detailGuru->id) }}" method="POST" id="guru-form-edit" enctype="multipart/form-data" class="row g-4 mt-3">
           @csrf
           @method('PUT')
           <input type="hidden" class="form-control" id="guru_nip_old" name="guru_nip_old" value="{{ $detailGuru->guru_nip }}">
@@ -106,15 +106,15 @@
             </div>
           </div>
           <div class="col-md-12">
-            <label for="guru_foto" class="form-label" style="font-weight: bold">Foto Guru</label>
-            <input type="file" class="form-control @error('guru_foto') is-invalid @enderror" id="guru_foto" name="guru_foto" onchange="previewImage()">
+            <label for="guru-foto" class="form-label" style="font-weight: bold">Foto Guru</label>
+            <input type="file" class="form-control @error('guru_foto') is-invalid @enderror" id="guru-foto" name="guru_foto" onchange="previewImage()">
             @error('guru_foto')
               <div class="invalid-feedback">
                 {{ $message }}
               </div>
             @enderror
             <button type="button" class="btn btn-primary mt-4" id="btn-preview-image" data-bs-toggle="modal" data-bs-target="#guru-modal-image-preview" style="display: none">Preview</button>
-            <button type="button" class="btn btn-warning mt-4" id="remove-preview-image" style="display: none" onclick="removePreviewImage()">Remove</button>
+            <button type="button" class="btn btn-warning mt-4" id="btn-remove-preview-image" style="display: none" onclick="removePreviewImage()">Remove</button>
           </div>
           <div class="d-flex justify-content-end gap-2 mt-3">
             <a href="{{ route('dataguru.index') }}" class="btn btn-secondary" type="button">Kembali</a>

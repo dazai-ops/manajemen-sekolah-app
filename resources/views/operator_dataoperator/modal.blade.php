@@ -1,4 +1,4 @@
-{{-- Modal change status --}}
+{{-- Modal for change status --}}
 <div class="modal fade" id="operator-modal-set-status" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -24,7 +24,7 @@
   </div>
 </div>
 
-{{-- Modal show detail --}}
+{{-- Modal for show detail --}}
 <div class="modal fade" id="operator-modal-detail-info" tabindex="-1">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">

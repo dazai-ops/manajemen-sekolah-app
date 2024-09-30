@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="pagetitle">
-  <h1>Dashboard</h1>
+  <h1>Jadwal Pelajaran Kelas: {{$kelas->kelas_nama}}</h1>
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
@@ -13,8 +13,8 @@
 {{-- {{$jadwal}} --}}
 <div class="section dashboard">
   <div class="row">
-    <div class="d-flex justify-content-between">
-      <h1>Jadwal untuk kelas: {{$kelas->kelas_nama}}</h1>
+    <div class="d-flex justify-content-between mb-3">
+      {{-- <h1>Jadwal untuk kelas: {{$kelas->kelas_nama}}</h1> --}}
       <a href="{{route('jadwal-pelajaran.index')}}" class="btn btn-info my-auto">
         <i class="bi bi-bar-chart-line"></i>
         Lihat Jadwal Lain
@@ -49,20 +49,29 @@
                                 <button type="button" class="btn btn-warning jadwal-list-button-edit" data-bs-toggle="modal" data-bs-target="#jadwal-list-modal-edit" data-id="{{ $item->id }}">
                                   <i class="bi bi-pencil-fill"></i>
                                 </button>
-                                <form action="{{route('jadwal-pelajaran.destroy', $item->id)}}" method="POST">
+                                {{-- <form id="jadwal-list-form-hapus" method="POST" data-id="{{ $item->id }}">
                                   @csrf
-                                  @method('DELETE')
-                                  <input type="hidden" name="kelas_id" value="{{$kelas->id}}">
-                                  <button type="submit" class="btn btn-danger" data-confirm-delete="true">
+                                  <input type="hidden" name="kelas_id" id="kelas_id" value="{{$kelas->id}}">
+                                  <button type="submit" class="btn btn-danger">
                                     <i class="bi bi-trash-fill"></i>
                                   </button>
-                                </form>
+                                </form> --}}
+                                {{-- <button type="button" class="btn btn-danger jadwal-list-button-hapus" data-id="{{ $item->id }}" data-kelas-id="{{$kelas->id}}">
+                                  <i class="bi bi-trash-fill"></i>
+                                </button> --}}
+                                <a href="#" class="btn btn-danger jadwal-list-button-hapus" data-id="{{ $item->id }}">
+                                  <i class="bi bi-trash-fill"></i>
+                                </a>
                               </td>
                           </tr>
                       @endif
                   @endforeach
               </tbody>
-          </table>
+            </table>
+            <button class="btn btn-outline-primary mb-3" style="width: 200px" data-bs-toggle="modal" data-bs-target="#jadwal-list-modal-tambah" data-kelas-id="{{ $kelas->id }}" data-hari="{{$day}}">
+              <i class="bi bi-plus-lg"></i>
+              Tambah
+            </button>
         @endforeach
     </div>
   </div>

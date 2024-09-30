@@ -16,8 +16,8 @@ class GuruController extends Controller
      */
     public function index()
     {   
-        $title = 'Hapus data guru!';
-        $text = "Apakah anda yakin untuk menghapus data ini?";
+        $title = 'Hapus data guru?';
+        $text = "Data tidak dapat dikembalikan!";
         confirmDelete($title, $text);
 
         $dataGuru = Guru::with('mapel')->get();
@@ -235,5 +235,6 @@ class GuruController extends Controller
         $guru->delete();
         Alert::success('Berhasil', 'Data guru berhasil dihapus');
         return redirect('/dataguru')->with('success', 'Data guru berhasil dihapus');
+        
     }
 }

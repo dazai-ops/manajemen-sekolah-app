@@ -47,20 +47,20 @@ class OperatorController extends Controller
             'operator_confirm_password' => ['required', 'same:operator_password'],
         ],[
             'operator_nama.required' => 'Nama wajib diisi.',
-            'operator_nama.regex' => 'Nama hanya boleh berisi huruf dan spasi.',
-            'operator_nama.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+            'operator_nama.regex' => 'Karakter nama tidak valid',
+            'operator_nama.max' => 'Karakter nama terlalu panjang',
             
             'operator_username.required' => 'Username wajib diisi.',
-            'operator_username.unique' => 'Username sudah terdaftar',
-            'operator_username.max' => 'Username tidak boleh lebih dari 255 karakter.',
+            'operator_username.unique' => 'Username telah terdaftar',
+            'operator_username.max' => 'Karakter username terlalu panjnag',
             
             'operator_jenis_kelamin.required' => 'Jenis kelamin wajib diisi.',
 
             'operator_email.required' => 'Email wajib diisi.',
-            'operator_email.unique' => 'Email sudah terdaftar',
+            'operator_email.unique' => 'Email telah terdaftar',
             
             'operator_nomor_telepon.required' => 'Nomor telepon wajib diisi.',
-            'operator_nomor_telepon.unique' => 'Nomor telepon sudah terdaftar',
+            'operator_nomor_telepon.unique' => 'Nomor telepon telah terdaftar',
             'operator_nomor_telepon.max' => 'Nomor telepon tidak boleh lebih dari 15 karakter.',
             
             'operator_password.required' => 'Password wajib diisi.',
@@ -90,7 +90,7 @@ class OperatorController extends Controller
         $operator->save();
 
         Alert::success('Berhasil', 'Data operator berhasil ditambahkan');
-        return redirect('/dataoperator')->with('success', 'Data operator berhasil ditambahkan');
+        return redirect('/dataoperator');
     }
 
     /**
@@ -98,7 +98,7 @@ class OperatorController extends Controller
      */
     public function show(string $id)
     {
-        $operator = Operator::findOrFail($id)->makeHidden(['operator_is_aktif','operator_password', 'created_at', 'updated_at', 'deleted_at', 'remember_token']);
+        $operator = Operator::findOrFail($id)->makeHidden(['operator_is_aktif','password', 'created_at', 'updated_at', 'deleted_at', 'remember_token']);
         $operator->operator_jenis_kelamin = $operator->operator_jenis_kelamin ? 'Laki-laki' : 'Perempuan';
         return response()->json([
             'success' => true,
@@ -145,14 +145,14 @@ class OperatorController extends Controller
             $operator = Operator::findOrFail($id);
             $operator->operator_is_aktif = $request->input('status');
             $operator->save();
-
-            session()->flash('success', 'Status operator berhasil diubah');
-
+            Alert::success('Berhasil', 'Status operator berhasil diubah');
         }catch(\Exception $e){
-            session()->flash('error', 'Status operator gagal diubah');
+            Alert::error('Gagal', 'Status operator gagal diubah');
         }
-        
-        Alert::success('Berhasil', 'Status operator berhasil diubah');
-        return response()->json($operator);
+
+        return response()->json([
+            'data' => $operator
+        ]);
+
     }
 }

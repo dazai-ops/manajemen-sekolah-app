@@ -19,7 +19,7 @@
           <select class="form-select" aria-label="Default select example" name="select-jadwal-pelajaran" id="jadwal-pelajaran-select" onchange="showJadwal()">
             <option disabled selected>Pilih opsi ini</option>
             @foreach ($dataKelas as $item)
-                <option value="{{$item->id}}">{{$item->kelas_nama}}</option>
+              <option value="{{$item->id}}">{{$item->kelas_nama}}</option>
             @endforeach
           </select>
         </div>

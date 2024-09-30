@@ -33,7 +33,7 @@
               @csrf
               <div class="col-12">
                 <label for="operator_username" class="form-label">Username</label>
-                <input type="text" name="operator_username" class="form-control" id="operator_username" required>
+                <input type="text" name="operator_username" class="form-control" id="operator_username" required autofocus>
                 {{-- @error('operator_username')                 
                   <div class="invalid-feedback">{{ $message }}</div>
                 @enderror --}}

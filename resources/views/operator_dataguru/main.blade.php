@@ -16,12 +16,11 @@
   
       <div class="card">
         <div class="card-body">
-          <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
+          <div class="d-flex justify-content-start align-items-center mt-4 mb-3">
             <a href="{{ route('dataguru.create') }}" class="btn btn-outline-primary">
               <i class="bi bi-plus"></i>
               Tambah Guru
             </a>
-            <h1></h1>
           </div>
           <table id="initDataTable" class="table" style="width:100%">
             <thead>
@@ -44,7 +43,7 @@
                     6 => 'bg-dark',      // ID 6 -> Dark
                     7 => 'bg-secondary', // ID 7 -> Secondary
                     8 => 'bg-light',     // ID 8 -> Light
-                    9 => 'bg-primary',   // ID 9 -> Primary (atau warna lain sesuai keinginan)
+                    9 => 'bg-primary',   // ID 9 -> Primary
                     10 => 'bg-success',  // ID 10 -> Success
                     11 => 'bg-danger',   // ID 11 -> Danger
                     12 => 'bg-warning',  // ID 12 -> Warning
