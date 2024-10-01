@@ -4,15 +4,7 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
-
-        <div class="d-flex justify-content-center align-items-center flex-column">
-          {{-- <a href="index.html" class="logo d-flex align-items-center flex-column w-auto">
-            <span class="d-none d-lg-block">Welcome Back</span>
-          </a> --}}
-        </div><!-- End Logo -->
-        
         <div class="card mb-3">
-          
           <div class="card-body d-flex flex-column align-items-center">
             
             <img src="{{ asset('img/sma_5_surabaya.png') }}" alt="" class="mt-4" style="width: 110px; height:120px;">
@@ -34,17 +26,11 @@
               <div class="col-12">
                 <label for="operator_username" class="form-label">Username</label>
                 <input type="text" name="operator_username" class="form-control" id="operator_username" required autofocus>
-                {{-- @error('operator_username')                 
-                  <div class="invalid-feedback">{{ $message }}</div>
-                @enderror --}}
               </div>
 
               <div class="col-12">
                 <label for="operator_password" class="form-label">Password</label>
                 <input type="password" name="operator_password" class="form-control" id="operator_password" required>
-                {{-- @error('operator_password')                 
-                  <div class="invalid-feedback">{{ $message }}</div>
-                @enderror --}}
               </div>
               <div class="col-12">
                 <button class="btn btn-primary w-100" type="submit">Login</button>
@@ -53,7 +39,6 @@
 
           </div>
         </div>
-
         {{-- <div class="credits">
           <!-- All the links in the footer should remain intact. -->
           <!-- You can delete the links only if you purchased the pro version. -->

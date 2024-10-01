@@ -8,7 +8,7 @@
         <li class="breadcrumb-item active">Dashboard</li>
       </ol>
     </nav>
-  </div><!-- End Page Title -->
+  </div>
 <div class="section dashboard">
     <div class="row">
         <div class="col-12">

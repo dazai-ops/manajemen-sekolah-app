@@ -9,12 +9,10 @@
       <li class="breadcrumb-item"><a href="{{ route('jadwal-pelajaran.index') }}">Jadwal Pelajaran</a></li>
     </ol>
   </nav>
-</div><!-- End Page Title -->
-{{-- {{$jadwal}} --}}
+</div>
 <div class="section dashboard">
   <div class="row">
     <div class="d-flex justify-content-between mb-3">
-      {{-- <h1>Jadwal untuk kelas: {{$kelas->kelas_nama}}</h1> --}}
       <a href="{{route('jadwal-pelajaran.index')}}" class="btn btn-info my-auto">
         <i class="bi bi-bar-chart-line"></i>
         Lihat Jadwal Lain
@@ -41,28 +39,18 @@
                   @foreach($jadwal as $item)
                       @if($item->hari === $day)
                           <tr>
-                              <td>{{ $item->mapel->mapel_nama }}</td>
-                              <td>{{ $item->guru->guru_nama }}</td>
-                              <td>{{ $item->jam_mulai }}</td>
-                              <td>{{ $item->jam_selesai }}</td>
-                              <td class="d-flex gap-1 align-middle">
-                                <button type="button" class="btn btn-warning jadwal-list-button-edit" data-bs-toggle="modal" data-bs-target="#jadwal-list-modal-edit" data-id="{{ $item->id }}">
-                                  <i class="bi bi-pencil-fill"></i>
-                                </button>
-                                {{-- <form id="jadwal-list-form-hapus" method="POST" data-id="{{ $item->id }}">
-                                  @csrf
-                                  <input type="hidden" name="kelas_id" id="kelas_id" value="{{$kelas->id}}">
-                                  <button type="submit" class="btn btn-danger">
-                                    <i class="bi bi-trash-fill"></i>
-                                  </button>
-                                </form> --}}
-                                {{-- <button type="button" class="btn btn-danger jadwal-list-button-hapus" data-id="{{ $item->id }}" data-kelas-id="{{$kelas->id}}">
-                                  <i class="bi bi-trash-fill"></i>
-                                </button> --}}
-                                <a href="#" class="btn btn-danger jadwal-list-button-hapus" data-id="{{ $item->id }}">
-                                  <i class="bi bi-trash-fill"></i>
-                                </a>
-                              </td>
+                            <td>{{ $item->mapel->mapel_nama }}</td>
+                            <td>{{ $item->guru->guru_nama }}</td>
+                            <td>{{ $item->jam_mulai }}</td>
+                            <td>{{ $item->jam_selesai }}</td>
+                            <td class="d-flex gap-1 align-middle">
+                              <button type="button" class="btn btn-warning jadwal-list-button-edit" data-bs-toggle="modal" data-bs-target="#jadwal-list-modal-edit" data-id="{{ $item->id }}">
+                                <i class="bi bi-pencil-fill"></i>
+                              </button>
+                              <a href="#" class="btn btn-danger jadwal-list-button-hapus" data-id="{{ $item->id }}">
+                                <i class="bi bi-trash-fill"></i>
+                              </a>
+                            </td>
                           </tr>
                       @endif
                   @endforeach

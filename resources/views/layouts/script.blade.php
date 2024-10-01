@@ -6,6 +6,7 @@
 
 <!-- Vendor JS Files -->
 <script src="{{ asset('templates/assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
+
 {{-- <script src="{{ asset('templates/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script> --}}
 <script src="{{ asset('templates/assets/vendor/chart.js/chart.umd.js') }}"></script>
 <script src="{{ asset('templates/assets/vendor/echarts/echarts.min.js') }}"></script>
@@ -18,8 +19,6 @@
 <script src="{{ asset('templates/assets/js/main.js') }}"></script>
 
 {{-- Data table --}}
-{{-- <script src="https://code.jquery.com/jquery-3.7.1.js"></script> --}}
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script> --}}
 <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
 <script src="https://cdn.datatables.net/2.1.7/js/dataTables.bootstrap5.js"></script>
 <script>

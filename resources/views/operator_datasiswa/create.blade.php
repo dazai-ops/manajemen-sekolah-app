@@ -1,16 +1,15 @@
 @extends('layouts.main')
 
 @section('content')
-{{-- {{$dataKelas}} --}}
 <div class="pagetitle">
   <h1>Dashboard</h1>
   <nav>
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-      <li class="breadcrumb-item active">Dashboard</li>
+      <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{{ route('datasiswa.index') }}">Data Siswa</a></li>
     </ol>
   </nav>
-</div><!-- End Page Title -->
+</div>
 
 <div class="section dashboard">
   <div class="row">
