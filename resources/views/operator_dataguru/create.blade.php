@@ -9,7 +9,7 @@
       <li class="breadcrumb-item"><a href="{{route('dataguru.index')}}">Data Guru</a></li>
     </ol>
   </nav>
-</div><!-- End Page Title -->
+</div>
 
 <div class="section dashboard">
   <div class="row">

@@ -1,4 +1,4 @@
-{{-- Modal tambah mapel --}}
+{{-- Modal tambah jadwal list --}}
 <div class="modal fade" id="jadwal-list-modal-edit" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -58,7 +58,7 @@
   </div>
 </div>
 
-{{-- Tambah mapel --}}
+{{-- Modal edit jadwal list --}}
 <div class="modal fade" id="jadwal-list-modal-tambah" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">

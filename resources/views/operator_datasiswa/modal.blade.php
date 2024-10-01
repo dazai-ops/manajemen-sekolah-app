@@ -1,9 +1,9 @@
-{{-- Modal show detail --}}
+{{-- Modal preview foto --}}
 <div class="modal fade" id="siswa-modal-preview-foto" tabindex="-1">
   <div class="modal-dialog ">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="card-title">Preview Foto Guru</h1>
+        <h1 class="card-title">Preview Foto Siswa</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="card" style="box-shadow: none">
@@ -12,6 +12,8 @@
     </div>
   </div>
 </div>
+
+{{-- Modal for show detail --}}
 <div class="modal fade" id="siswa-modal-detail-info" tabindex="-1">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -65,5 +67,3 @@
     </div>
   </div>
 </div>
-
-{{-- Modal show preview --}}

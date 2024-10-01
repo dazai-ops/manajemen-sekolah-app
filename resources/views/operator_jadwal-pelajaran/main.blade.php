@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
+
 <div class="pagetitle">
   <h1>Jadwal Pelajaran</h1>
   <nav>
@@ -9,8 +10,8 @@
       <li class="breadcrumb-item"><a href="{{ route('jadwal-pelajaran.index') }}">Jadwal Pelajaran</a></li>
     </ol>
   </nav>
-</div><!-- End Page Title -->
-{{-- {{$jadwal}} --}}
+</div>
+
 <div class="section dashboard">
   <div class="row">
     <div class="col-md-12">
