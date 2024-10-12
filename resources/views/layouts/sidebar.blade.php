@@ -29,6 +29,11 @@
           </a>
         </li>
         <li>
+          <a href="{{ route('datakelas.index') }}" class="{{ request()->routeIs('datakelas.*') ? 'active' : ''}}">
+            <i class="bi bi-circle"></i><span>Kelas</span>
+          </a>
+        </li>
+        <li>
           <a href="{{ route('datamapel.index') }}" class="{{ request()->routeIs('datamapel.*') ? 'active' : '' }}">
             <i class="bi bi-circle"></i><span>Mapel</span>
           </a>

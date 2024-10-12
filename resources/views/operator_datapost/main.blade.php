@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="pagetitle">
-  <h1>Data Siswa</h1>
+  <h1>Data Post</h1>
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-      <li class="breadcrumb-item"><a href="{{ route('datasiswa.index') }}">Data Siswa</a></li>
+      <li class="breadcrumb-item"><a href="{{ route('datasiswa.index') }}">Data Post</a></li>
     </ol>
   </nav>
 </div>
@@ -39,7 +39,7 @@
                 <tr>
                   <td class="text-center">{{ $loop->iteration }}</td>
                   <td>
-                    <img src="{{ asset(Storage::exists('public/foto_siswa/' . $siswa->siswa_foto) ? 'storage/foto_siswa/' . $siswa->siswa_foto : 'img/profile.jpg') }}" alt="Guru" class="rounded-circle" style="width: 35px; height: 35px;"> 
+                    <img src="{{ asset($siswa->siswa_foto ? 'storage/foto_siswa/' . $siswa->siswa_foto : 'img/profile.jpg') }}" alt="Guru" class="rounded-circle" style="width: 35px; height: 35px;"> 
                   </td>
                   <td class="align-middle">{{ $siswa->siswa_nama }}</td>
                   <td class="align-middle">{{ $siswa->kelas->kelas_nama }}</td>

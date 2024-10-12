@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Mapel;
+use App\Models\JadwalList;
 
 class Guru extends Model
 {
@@ -17,7 +19,7 @@ class Guru extends Model
     }
 
     public function jadwal_list(){
-        return $this->hasMany(JadwaList::class);
+        return $this->hasMany(JadwalList::class);
     }
 
 

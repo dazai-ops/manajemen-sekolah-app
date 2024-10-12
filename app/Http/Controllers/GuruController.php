@@ -234,7 +234,7 @@ class GuruController extends Controller
         $guru = Guru::findOrFail($id);
         $guru->delete();
         Alert::success('Berhasil', 'Data guru berhasil dihapus');
-        return redirect('/dataguru')->with('success', 'Data guru berhasil dihapus');
+        return redirect('/dataguru');
         
     }
 }

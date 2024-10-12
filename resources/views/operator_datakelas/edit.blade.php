@@ -16,7 +16,7 @@
         <div class="card-body d-flex flex-column justify-content-center">
 
             <div class="image-profile d-flex justify-content-center flex-column align-items-center">
-                <img src="{{ asset(Storage::exists('public/foto_siswa/'. $dataSiswa->siswa_foto) ? 'storage/foto_siswa/'.$dataSiswa->siswa_foto : 'img/profile.jpg') }}" alt="" class="rounded-circle mt-4 cursor-pointer" style="width: 150px; height: 150px; margin:0 auto">
+                <img src="{{ asset($dataSiswa->siswa_foto ? 'storage/foto_siswa/'.$dataSiswa->siswa_foto : 'img/profile.jpg') }}" alt="" class="rounded-circle mt-4 cursor-pointer" style="width: 150px; height: 150px; margin:0 auto">
             </div>
 
             <form action="{{ route('datasiswa.update', $dataSiswa->id) }}" method="POST" enctype="multipart/form-data" class="row g-4 mt-3">

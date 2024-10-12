@@ -1,14 +1,15 @@
 <?php
 
 namespace Database\Factories;
-
+use App\Models\Fasilitas;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Fasilitas>
  */
-class KelasTingkatanFactory extends Factory
-{
+class FasilitasFactory extends Factory
+{   
+    protected $model = Fasilitas::class;
     /**
      * Define the model's default state.
      *

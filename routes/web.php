@@ -8,6 +8,8 @@ use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\JadwalListController;
+use App\Http\Controllers\KelasController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,4 +49,9 @@ Route::middleware('operator.auth')->group(function (){
     // Jadwal
     Route::resource('/jadwal-pelajaran', JadwalListController::class);
     Route::get('/jadwal-pelajaran-list/{id}', [JadwalListController::class, 'jadwal_list']);
+    // Post
+    Route::resource('/post', PostController::class);
+    // Kelas
+    Route::resource('/datakelas', KelasController::class);
+    Route::get('/datakelas/{id}/get-data', [KelasController::class, 'getDataKelas'])->name('datakelas.getdata');
 });

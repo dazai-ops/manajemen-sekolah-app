@@ -1,15 +1,15 @@
 <?php
 
 namespace Database\Factories;
-use App\Models\Mapel;
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Mapel>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tag>
  */
-class MapelFactory extends Factory
+class TagFactory extends Factory
 {   
-    protected $model = Mapel::class;
+    protected $model = Tag::class;
     /**
      * Define the model's default state.
      *
@@ -18,7 +18,7 @@ class MapelFactory extends Factory
     public function definition(): array
     {
         return [
-            'mapel_nama' => $this->faker->word(),
+            'tag_nama' => $this->faker->word()
         ];
     }
 }
