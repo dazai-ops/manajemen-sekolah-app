@@ -1,34 +1,61 @@
 <script>
 
-  function swallConfirmSave(icon, title, form){
-    Swal.fire({
-        title: title,
-        icon: icon,
-        showCancelButton: true,
-        confirmButtonText: 'Yakin',
-        cancelButtonText: 'Batal'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          form.submit();
+  // CREATE DATA GURU
+  $(document).ready(function() {
+    $(document).on('submit', '#guru-form-tambah', function(e) {
+      event.preventDefault();
+      var formData = $(this).serializeArray();
+      var isEmpty = false;
+      var excludedField = ['guru_alamat']
+
+      $.each(formData, function(i, field){
+        if(!field.value && !excludedField.includes(field.name)) {
+          isEmpty = true;
+        }
+      })
+
+      if (isEmpty) {
+        swallUncompleteData();
+      } else {
+        swallConfirmSave(this);
+      }
+    });
+
+  });
+  
+  // EDIT & UPDATE DATA GURU
+  $(document).ready(function() {
+    // simpan value lama dari setiap input
+    $('#guru-form-edit').find('input, input[type=number], select, textarea').each(function() {
+      $(this).data('original-value', $(this).val());
+    });
+
+    // cek apakah ada perubahan saat submit
+    $(document).on('submit', '#guru-form-edit', function(e) {
+      e.preventDefault();
+      const form = this;
+      var isChanged = false;
+      
+      // membandingkan value lama dengan value baru
+      $(form).find('input, select, input[type=number],  textarea').each(function() {
+        const originalValue = $(this).data('original-value');
+        const currentValue = $(this).val();
+        if (String(originalValue) !== String(currentValue)) {
+          isChanged = true;
         }
       });
-  }
-  $(document).ready(function() {
-    $('#guru-form-tambah').on('submit', function(e) {
-      e.preventDefault();
-      const form = this
-      swallConfirmSave('info', 'Yakin tambah data ini?', form)
+      if (!isChanged) {
+        swallNothingChange();
+        return;
+      } else {
+        swallConfirmUpdate(form);
+      }
     });
+  })
 
-    $('#guru-form-edit').on('submit', function(e) {
-      e.preventDefault();
-      const form = this
-      swallConfirmSave('info', 'Yakin mengubah data ini', form)
-    });
-  });
-
+  // SHOW DATA PROFILE GURU
   $(document).ready(function() {
-    $('.guru-button-detail-info').on('click', function(){
+    $(document).on('click', '.guru-button-detail-info', function(){
       var guruId = $(this).data('id')
 
       $.ajax({
@@ -45,12 +72,15 @@
           $('#guru-info-mapel').text(response.data.mapel_diampu)
         },
         error: function(err){
-          console.log(err)
+          swallFailedGetData().then(() => {
+            $('#guru-modal-detail-info').modal('hide');
+          });
         }
       })
     })
   })
 
+  // PREVIEW IMAGE PROFILE GURU
   function previewImage(){
     const image = document.querySelector('#guru-foto');
     const imagePreview = document.querySelector('#image-preview');
@@ -72,6 +102,7 @@
     }
   }
 
+  // HIDE AND REMOVE PREVIEW IMAGE & BUTTON
   function removePreviewImage(){
     document.getElementById('guru-foto').value = '';
     const imagePreview = document.getElementById('image-preview');

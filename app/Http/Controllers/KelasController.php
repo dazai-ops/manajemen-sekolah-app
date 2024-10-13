@@ -15,8 +15,8 @@ class KelasController extends Controller
      */
     public function index()
     {     
-        $title = 'Hapus data kelas?';
-        $text = "Data tidak dapat dikembalikan!";
+        $title = 'Hapus data!';
+        $text = "Yakin, hapus data kelas ini?";
         confirmDelete($title, $text);
 
         $dataGuru = Guru::all();

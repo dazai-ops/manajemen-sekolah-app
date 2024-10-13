@@ -6,7 +6,7 @@
         <h5 class="modal-title">Edit Mata Pelajaran</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form id="mapel-form-edit" method="POST" >
+      <form id="mapel-form-edit" method="POST">
         @csrf
         @method('PUT')
         <div class="col-md-12 p-2">
@@ -29,7 +29,7 @@
         <h5 class="modal-title">Tambah Mata Pelajaran</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form id="mapel-form-tambah" method="POST" >
+      <form id="mapel-form-tambah" method="POST">
         @csrf
         <div class="col-md-12 p-2">
           <input type="text" class="form-control" id="mapel-field-input-nama-baru" name="mapel_nama_baru">

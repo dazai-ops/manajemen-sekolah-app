@@ -3,63 +3,69 @@
 
   // Add new data confirm
   $(document).ready(function() {
-    $('#operator-form-tambah').on('submit', function(e) {
-      e.preventDefault();
+    $(document).on('submit', '#operator-form-tambah', function(event) {
+      event.preventDefault();
+      var formData = $(this).serializeArray();
+      var isEmpty = false;
+      var excludedField = ['operator_alamat']
 
-      Swal.fire({
-        title: 'Yakin menambahkan data ini?',
-        icon: 'info',
-        showCancelButton: true,
-        confirmButtonText: 'Yakin',
-        cancelButtonText: 'Batal'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.submit();
+      $.each(formData, function(i, field){
+        if(!field.value && !excludedField.includes(field.name)) {
+          isEmpty = true;
         }
-      });
+      })
+
+      if (isEmpty) {
+        swallUncompleteData();
+      } else {
+        swallConfirmSave(this)
+      }
+
     });
   });
 
   $(document).ready(function(){
-    // get data status operator
-    $('.operator-button-set-status').on('click', function(){
+    // get status operator
+    $(document).on('click', '.operator-button-set-status', function(){
       var operatorId = $(this).data('id')
-
       $.ajax({
         url: '/dataoperator/' + operatorId + '/get-status',
         method: 'GET',
         success: function(response){
           $('#operator-modal-info-nama').text(response.data.operator_nama)
-
+          $('#operator-checkbox-set-status').data('status', response.data.operator_is_aktif);
           if(response.data.operator_is_aktif == 1){
             $('#operator-checkbox-set-status').prop('checked', true)
           }else{
             $('#operator-checkbox-set-status').prop('checked', false)
           }
-
           $('#operator-form-set-status').data('id', operatorId)
         },
         error: function(){
-          console.log('Gagal mengambil data operator')
+          swallFailedGetData().then(() => {
+            $('#operator-modal-set-status').modal('hide');
+          });
         }
       })
     })
 
     // set status operator
-    $('#operator-form-set-status').on('submit', function(e) {
+    $(document).on('submit', '#operator-form-set-status', function(e) {
       e.preventDefault();
+      var operatorId  = $(this).data('id');
+      var statusBaru = $('#operator-checkbox-set-status').is(':checked') ? 1 : 0;
+      var statusLama = $('#operator-checkbox-set-status').data('status');
 
-      Swal.fire({
-          title: 'Yakin mengubah status?',
-          icon: 'info',
-          showCancelButton: true,
-          confirmButtonText: 'Ya, ubah',
-          cancelButtonText: 'Batal'
-      }).then((result) => {
+      if(statusBaru == statusLama){
+        swallNothingChange().then((result) => {
+          $('#operator-modal-set-status').modal('hide');
+        })
+        return;
+      }
+
+      swallConfirmUpdate('Ubah status!', 'Yakin ubah status operator ini?')
+      .then((result) => {
         if (result.isConfirmed) {
-          var operatorId  = $(this).data('id');
-          var statusBaru = $('#operator-checkbox-set-status').is(':checked') ? 1 : 0;
-
           $.ajax({
             url: '/dataoperator/' + operatorId + '/set-status',
             method: 'PUT',
@@ -72,7 +78,9 @@
               location.reload();
             },
             error: function(){
-              console.log('Gagal mengubah status operator');
+              swallFailedGetData().then(() => {
+                $('#operator-modal-set-status').modal('hide');
+              });
             }
           });
         }
@@ -80,9 +88,8 @@
     });
 
     // get detail info operator
-    $('.operator-button-detail-info').on('click', function(){
+    $(document).on('click', '.operator-button-detail-info', function(){
       var operatorId = $(this).data('id')
-      console.log(operatorId)
       $.ajax({
         url: '/dataoperator/' + operatorId,
         method: 'GET',
@@ -96,7 +103,9 @@
           $('#operator-info-alamat').text(response.data.operator_alamat)
         },
         error: function(){
-          console.log('Gagal mengambil data operator')
+          swallFailedGetData().then(() => {
+            $('#operator-modal-detail-info').modal('hide');
+          });
         }
       })
     })

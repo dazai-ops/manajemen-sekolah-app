@@ -1,4 +1,4 @@
-{{-- Modal tambah jadwal list --}}
+{{-- Modal edit jadwal list --}}
 <div class="modal fade" id="jadwal-list-modal-edit" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -58,7 +58,7 @@
   </div>
 </div>
 
-{{-- Modal edit jadwal list --}}
+{{-- Modal tambah jadwal list --}}
 <div class="modal fade" id="jadwal-list-modal-tambah" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -68,12 +68,12 @@
       </div>
       <form id="jadwal-list-form-tambah" method="POST">
         @csrf
-        <input type="hidden" class="form-control" id="hari">
-        <input type="hidden" class="form-control" id="kelas-id">
+        <input type="hidden" class="form-control" id="hari" name="hari">
+        <input type="hidden" class="form-control" id="kelas-id" name="kelas_id">
         <div class="col-md-12 p-2">
           <label for="mata-pelajaran-tambah" class="form-label">Mata Pelajaran<span class="text-danger">*</span></label>
           <div>
-            <select class="form-select" aria-label="Default select example" name="mata-pelajaran-tambah" id="mata-pelajaran-tambah">
+            <select class="form-select" aria-label="Default select example" name="mata_pelajaran_tambah" id="mata-pelajaran-tambah">
               <option selected disabled>Pilih opsi ini</option>
               @foreach ($dataMapel as $mapel)
                   <option value="{{ $mapel->id }}" >{{$mapel->mapel_nama}}</option>

@@ -7,6 +7,7 @@
 
   <title>{{ $pageTitle }}</title>
   @include('layouts.head')
+  @include('layouts.swal')
 </head>
 
 <body>

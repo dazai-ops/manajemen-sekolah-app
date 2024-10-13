@@ -117,8 +117,10 @@
             <button type="button" class="btn btn-warning mt-4" id="btn-remove-preview-image" style="display: none" onclick="removePreviewImage()">Remove</button>
           </div>
           <div class="d-flex justify-content-end gap-2 mt-3">
-            <button type="button" class="btn btn-secondary" onclick="window.history.back()">Kembali</button>
-            <button type="reset" class="btn btn-secondary">Reset</button>
+            <a href="{{ route('dataguru.index') }}" class="btn btn-secondary">
+              Kembali
+            </a>
+            <button type="reset" class="btn btn-warning">Reset</button>
             <button type="submit" class="btn btn-primary">Submit</button>
           </div>
         </form>

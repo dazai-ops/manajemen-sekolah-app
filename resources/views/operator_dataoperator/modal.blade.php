@@ -11,12 +11,12 @@
         @method('PUT')
         <div class="modal-body">
           <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="operator-checkbox-set-status">
+            <input class="form-check-input" type="checkbox" id="operator-checkbox-set-status" data-status={{$operator->operator_is_aktif}}>
             <label class="form-check-label operator-status" for="operator-checkbox-set-status">Ubah Status Operator</label>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+          <button type="button" class="btn btn-secondary operator-btn-set-status-close" data-bs-dismiss="modal">Tutup</button>
           <button type="submit" class="btn btn-primary">Simpan</button>
         </div>
       </form>

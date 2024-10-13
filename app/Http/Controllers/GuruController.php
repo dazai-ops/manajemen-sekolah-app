@@ -16,8 +16,8 @@ class GuruController extends Controller
      */
     public function index()
     {   
-        $title = 'Hapus data guru?';
-        $text = "Data tidak dapat dikembalikan!";
+        $title = 'Hapus data!';
+        $text = "Yakin, hapus data guru ini?";
         confirmDelete($title, $text);
 
         $dataGuru = Guru::with('mapel')->get();
@@ -79,7 +79,7 @@ class GuruController extends Controller
             'guru_foto.max' => 'Ukuran file terlalu besar',
         ]);
 
-        $fileName = $request->file('guru_foto') ? Str::uuid(). '.' .$request->file('guru_foto')->getClientOriginalExtension() : null;
+        $fileName = $request->file('guru_foto') ? Str::uuid(). '.' .$request->file('guru_foto')->getClientOriginalExtension() : '';
 
         if($request->file('guru_foto')) {
             $request->file('guru_foto')->storeAs('public/foto_guru', $fileName);
@@ -213,7 +213,7 @@ class GuruController extends Controller
             'guru_tempat_lahir' => $validatedData['guru_tempat_lahir'],
             'guru_tanggal_lahir' => $validatedData['guru_tanggal_lahir'],
             'guru_jenis_kelamin' => $validatedData['guru_jenis_kelamin'],
-            'guru_alamat' => $validatedData['guru_alamat'],
+            'guru_alamat' => $request->guru_alamat ? $validatedData['guru_alamat'] : '',
             'guru_nomor_telepon' => $validatedData['guru_nomor_telepon'],
             'guru_foto' => $fileName,
         ]);

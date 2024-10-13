@@ -1,41 +1,4 @@
 <script>
-    function swalConfirmDelete(title, text, url, csrfToken){
-        Swal.fire({
-            title: title,
-            text:text,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Ya, hapus!',
-            cancelButtonText: 'Batal'
-        }).then((result)=>{
-            if(result.isConfirmed){
-                $.ajax({
-                    url: url,
-                    method: 'DELETE',
-                    data: {
-                        _token: csrfToken
-                    },
-                    success: function(response){
-                        Swal.fire(
-                            'Terhapus',
-                            'Data berhasil dihapus',
-                            'success'
-                        ).then(()=> {
-                            window.location.reload()
-                        })
-                    },
-                    error: function(xhr){
-                        Swal.fire(
-                            'Error',
-                            'Data gagal dihapus',
-                            'error'
-                        )
-                    }
-                })
-            }
-        })
-    }
-
     function showJadwal() {
         const selectElement = document.getElementById('jadwal-pelajaran-select');
         const selectedClassId = selectElement.value;
@@ -47,9 +10,9 @@
 
     $(document).ready(function() {
 
-        $('.jadwal-list-button-edit').on('click', function(){
-        var jadwalListId = $(this).data('id')
-        console.log('clicked', jadwalListId)
+        $(document).on('click', '.jadwal-list-button-edit', function(){
+            var jadwalListId = $(this).data('id')
+            console.log('clicked', jadwalListId)
 
             $.ajax({
                 url: '/jadwal-pelajaran-list/' + jadwalListId,
@@ -62,97 +25,157 @@
                     $('#jam-selesai').val(response.data.jam_selesai)
 
                     $('#jadwal-list-form-edit').data('id', jadwalListId)
+
+                    $('#jadwal-list-form-edit').find('input, select').each(function() {
+                        $(this).data('original-value', $(this).val());
+                    });
                 },
                 error: function(err){
-                    console.log(err)
+                    swallFailedGetData().then(() => {
+                        $('#jadwal-list-modal-edit').modal('hide');
+                    });
                 }
             })
         })
 
-        $('#jadwal-list-form-edit').on('submit', function(e){
+        $(document).on('submit', '#jadwal-list-form-edit', function(e){
             e.preventDefault();
+            let mapelId  = $(this).data('id');
+            let mapel = $('#mata-pelajaran').val();
+            let guruPengajar = $('#guru-pengajar').val();
+            let jamMulai = $('#jam-mulai').val();
+            let jamSelesai = $('#jam-selesai').val();
+            let isChanged = false;
+            let isEmpty = false;
+            const form = this;
 
-            var mapelId  = $(this).data('id');
-            var mapel = $('#mata-pelajaran').val();
-            var guruPengajar = $('#guru-pengajar').val();
-            var jamMulai = $('#jam-mulai').val();
-            var jamSelesai = $('#jam-selesai').val();
-
-            console.log(mapelId, mapel, guruPengajar, jamMulai, jamSelesai)
-            $.ajax({
-                url: '/jadwal-pelajaran/' + mapelId,
-                method: 'PUT',
-                data: {
-                _token: $('input[name="_token"]').val(),
-                _method: 'PUT',
-
-                // kelas: ,
-                mapel: mapel,
-                guru: guruPengajar,
-                jam_mulai: jamMulai,
-                jam_selesai: jamSelesai,
-            },
-                success: function(response){
-                    console.log('Status berhasil diubah');
-                    location.reload();
-                },
-                    error: function(){
-                    console.log('Gagal mengubah status operator');  
+            $(form).find('input, select').each(function() {
+                const originalValue = $(this).data('original-value');
+                const currentValue = $(this).is('select') ? $(this).val() : $(this).val();
+                console.log('awal',originalValue, 'akhir',currentValue)
+                if (JSON.stringify(originalValue) !== JSON.stringify(currentValue)) {
+                isChanged = true;
                 }
             });
+            if (!isChanged) {
+                swallNothingChange();
+                return;
+            }
+
+            $(this).find('input, select').each(function() {
+                if (!$(this).val()) {
+                    isEmpty = true;
+                }
+            });
+            if (isEmpty) {
+                swallUncompleteData();
+                return;
+            }
+
+            swallConfirmSaveJs().then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/jadwal-pelajaran/' + mapelId,
+                        method: 'PUT',
+                        data: {
+                        _token: $('input[name="_token"]').val(),
+                        _method: 'PUT',
+                        mapel: mapel,
+                        guru: guruPengajar,
+                        jam_mulai: jamMulai,
+                        jam_selesai: jamSelesai,
+                    },
+                    success: function(response){
+                        swallSuccessUpdateData()
+                    },
+                    error: function(){
+                        swallFailedUpdateData().then(() => {
+                            $('#jadwal-list-modal-edit').modal('hide');
+                        })
+                    }
+                    });
+                }
+            })
         });
 
-        $('#jadwal-list-modal-tambah').on('show.bs.modal', function(e){
+        $(document).on('show.bs.modal', '#jadwal-list-modal-tambah', function(e){
             var button = $(e.relatedTarget)
             var kelasId = button.data('kelas-id')
             var hari = button.data('hari')
             $('#kelas-id').val(kelasId)
             $('#hari').val(hari)
-
             console.log(kelasId, hari)
         })
 
-        $('#jadwal-list-form-tambah').on('submit', function(e){
+        $(document).on('submit', '#jadwal-list-form-tambah', function(e){
             e.preventDefault();
+            let kelasId = $('#kelas-id').val();
+            let hari = $('#hari').val();
+            let mapel = $('#mata-pelajaran-tambah').val();
+            let guruPengajar = $('#guru-pengajar-tambah').val();
+            let jamMulai = $('#jam-mulai-tambah').val();
+            let jamSelesai = $('#jam-selesai-tambah').val();
+            let isEmpty = false;
 
-            var kelasId = $('#kelas-id').val();
-            var hari = $('#hari').val();
-            var mapel = $('#mata-pelajaran-tambah').val();
-            var guruPengajar = $('#guru-pengajar-tambah').val();
-            var jamMulai = $('#jam-mulai-tambah').val();
-            var jamSelesai = $('#jam-selesai-tambah').val();
-
-            console.log(kelasId, hari,  guruPengajar, jamMulai, jamSelesai)
-            $.ajax({
-                url: '/jadwal-pelajaran',
-                method: 'POST',
-                data: {
-                    _token: $('input[name="_token"]').val(),
-
-                    kelas: kelasId,
-                    hari: hari,
-                    mapel: mapel,
-                    guru: guruPengajar,
-                    jam_mulai: jamMulai,
-                    jam_selesai: jamSelesai,
-                },
-                success: function(response){
-                    console.log('Status berhasil diubah');
-                    location.reload();
-                },
-                    error: function(){
-                    console.log('Gagal mengubah status operator');  
+            $(this).find('input, select').each(function() {
+                if (!$(this).val()) {
+                isEmpty = true;
                 }
             });
+            if (isEmpty) {
+                swallUncompleteData();
+            }else{
+                swallConfirmSaveJs().then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/jadwal-pelajaran',
+                        method: 'POST',
+                        data: {
+                            _token: $('input[name="_token"]').val(),        
+                            kelas: kelasId,
+                            hari: hari,
+                            mapel: mapel,
+                            guru: guruPengajar,
+                            jam_mulai: jamMulai,
+                            jam_selesai: jamSelesai,
+                        },
+                        success: function(response){
+                            swallSuccessSaveData();
+                        },
+                        error: function(){
+                            swallFailedSaveData();  
+                        }
+                    });
+                }
+                });
+            }
         });
 
-        $('.jadwal-list-button-hapus').on('click', function(e){
+        $(document).on('click', '.jadwal-list-button-hapus', function(e){
             e.preventDefault()
             var jadwalId = $(this).data('id')
             var url = '/jadwal-pelajaran/' + jadwalId;
             var csrfToken = $('meta[name="csrf-token"]').attr('content')
 
-            swalConfirmDelete('Hapus data jadwal!', 'Apakah anda yakin menghapus data ini?', url, csrfToken)
+            swallConfirmDelete('Hapus data jadwal!', 'Apakah anda yakin menghapus data ini?', url, csrfToken)
+            .then((result)=>{
+            if(result.isConfirmed){
+                $.ajax({
+                    url: url,
+                    method: 'DELETE',
+                    data: {
+                        _token: csrfToken
+                    },
+                    success: function(response){
+                        swallSuccessDeleteData();
+                        location.reload();
+                    },
+                    error: function(xhr){
+                        swallFailedDeleteData();
+                    }
+                })
+            }
+        })
 
         })
     })

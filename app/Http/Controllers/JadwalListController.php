@@ -51,7 +51,6 @@ class JadwalListController extends Controller
             $jadwalList->jam_selesai = $request->input('jam_selesai');
 
             $jadwalList->save();
-            Alert::success('Berhasil', 'Jadwal berhasil ditambahkan');
             return response()->json([
                 'success' => true,
                 'message' => 'Jadwal berhasil ditambahkan',
@@ -122,7 +121,6 @@ class JadwalListController extends Controller
             $jadwalList->jam_selesai = $request->input('jam_selesai');
     
             $jadwalList->save();
-            Alert::success('Berhasil', 'Jadwal list berhasil diubah');
             return response()->json($jadwalList);
         }catch(\Exception $e){
             Alert::error('Gagal', 'Jadwal list gagal diubah');

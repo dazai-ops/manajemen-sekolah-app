@@ -19,7 +19,7 @@
                 <img src="{{ asset(Storage::exists('public/foto_siswa/'. $dataSiswa->siswa_foto) ? 'storage/foto_siswa/'.$dataSiswa->siswa_foto : 'img/profile.jpg') }}" alt="" class="rounded-circle mt-4 cursor-pointer" style="width: 150px; height: 150px; margin:0 auto">
             </div>
 
-            <form action="{{ route('datasiswa.update', $dataSiswa->id) }}" method="POST" enctype="multipart/form-data" class="row g-4 mt-3">
+            <form action="{{ route('datasiswa.update', $dataSiswa->id) }}" method="POST" enctype="multipart/form-data" id="siswa-form-edit" class="row g-4 mt-3">
             @csrf
             @method('PUT')
             <input type="hidden" class="form-control" id="siswa_nisn_old" name="siswa_nisn_old" value="{{ $dataSiswa->siswa_nisn }}">
@@ -128,8 +128,7 @@
                 <a href="{{route('datasiswa.index')}}" class="btn btn-secondary">
                     Kembali
                 </a>
-                <button type="reset" class="btn btn-secondary">Reset</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
             </form>
         </div>

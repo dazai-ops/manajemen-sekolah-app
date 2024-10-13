@@ -15,7 +15,7 @@
   <div class="row">
     <div class="card">
         <div class="card-body d-flex flex-column justify-content-center">
-            <form action="{{ route('datasiswa.store') }}" method="POST" enctype="multipart/form-data" class="row g-4 mt-3">
+            <form action="{{ route('datasiswa.store') }}" method="POST" enctype="multipart/form-data" id="siswa-form-tambah" class="row g-4 mt-3">
             @csrf
             <div class="col-md-4">
                 <label for="siswa_nama" class="form-label" style="font-weight: bold">Nama Lengkap <span class="text-danger">*</span></label>
@@ -122,8 +122,8 @@
                 <a href="{{route('datasiswa.index')}}" class="btn btn-secondary">
                     Kembali
                 </a>
-                <button type="reset" class="btn btn-secondary">Reset</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-warning">Reset</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
             </form>
         </div>

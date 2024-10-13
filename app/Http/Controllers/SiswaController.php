@@ -17,8 +17,8 @@ class SiswaController extends Controller
      */
     public function index()
     {   
-        $title = 'Hapus data siswa!';
-        $text = "Apakah anda yakin untuk menghapus data ini?";
+        $title = 'Hapus data!';
+        $text = "Yakin, hapus data siswa ini?";
         confirmDelete($title, $text);
 
         $dataSiswa = Siswa::with('kelas')->get();
@@ -81,7 +81,7 @@ class SiswaController extends Controller
             'siswa_foto.max' => 'Ukuran gambar tidak boleh lebih dari 1 MB',
         ]);
 
-        $fileName = $request->file('siswa_foto') ? Str::uuid(). '.' .$request->file('siswa_foto')->getClientOriginalExtension() : null;
+        $fileName = $request->file('siswa_foto') ? Str::uuid(). '.' .$request->file('siswa_foto')->getClientOriginalExtension() : '';
 
         if($request->file('siswa_foto')) {
             $request->file('siswa_foto')->storeAs('public/foto_siswa', $fileName);
@@ -91,7 +91,7 @@ class SiswaController extends Controller
             'siswa_nama' => $rulesValidate['siswa_nama'],
             'siswa_nisn' => $rulesValidate['siswa_nisn'],
             'siswa_jenis_kelamin' => $rulesValidate['siswa_jenis_kelamin'],
-            'siswa_alamat' => $rulesValidate['siswa_alamat'] ? $rulesValidate['siswa_alamat'] : '',
+            'siswa_alamat' => $request->filled('siswa_alamat') ? $rulesValidate['siswa_alamat'] : '',
             'siswa_kelas_id' => $rulesValidate['siswa_kelas'],
             'siswa_nomor_telepon' => $rulesValidate['siswa_nomor_telepon'],
             'siswa_tempat_lahir' => $rulesValidate['siswa_tempat_lahir'],
@@ -203,7 +203,7 @@ class SiswaController extends Controller
             'siswa_jenis_kelamin' => $validatedData['siswa_jenis_kelamin'],
             'siswa_nomor_telepon' => $validatedData['siswa_nomor_telepon'],
             'siswa_kelas_id' => $validatedData['siswa_kelas'], // Assuming this is the correct field name in your model
-            'siswa_alamat' => $validatedData['siswa_alamat'],
+            'siswa_alamat' => $request->filled('siswa_alamat') ? $validatedData['siswa_alamat'] : '',
             'siswa_tempat_lahir' => $validatedData['siswa_tempat_lahir'],
             'siswa_tanggal_lahir' => $validatedData['siswa_tanggal_lahir'],
             'siswa_foto' => $fileName

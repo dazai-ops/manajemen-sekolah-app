@@ -96,7 +96,7 @@
           </div>
           <div class="d-flex justify-content-end gap-2 mt-3">
             <a href="{{ route('dataoperator.index') }}" class="btn btn-secondary"> Kembali</a>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
           </div>
         </form>
       </div>

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Mapel;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
-
 class MapelController extends Controller
 {
     /**
@@ -13,8 +12,8 @@ class MapelController extends Controller
      */
     public function index()
     {   
-        $title = 'Hapus data mata pelajaran?';
-        $text = "Data tidak dapat dikembalikan!";
+        $title = 'Hapus data!';
+        $text = "Yakin, hapus data mapel ini?";
         confirmDelete($title, $text);
 
         $dataMapel = Mapel::withCount('guru')->get();
@@ -95,13 +94,13 @@ class MapelController extends Controller
      */
     public function destroy(string $id)
     {   
-        try{
-            $mapel = Mapel::findOrFail($id);
-            $mapel->delete();
-            Alert::success('Berhasil', 'Mapel berhasil dihapus');
-            return redirect('/datamapel');
-        }catch(\Exception $e){
-            Alert::error('Gagal', 'Mapel gagal dihapus');
-        }
+        // try{
+        // }catch(\Exception $e){
+        //     Alert::error('Gagal', 'Mapel gagal dihapus');
+        // }
+        $mapel = Mapel::findOrFail($id);
+        $mapel->delete();
+        Alert::success('Berhasil', 'Mapel berhasil dihapus');
+        return redirect('/datamapel');
     }
 }
