@@ -57,7 +57,6 @@ class KelasController extends Controller
             $kelas->kelas_guru_wali_id = $request->nama_guru_tambah;
             $kelas->save();
             $kelas->fasilitas()->sync($request->kelas_fasilitas_tambah);
-            Alert::success('Berhasil', 'Data kelas berhasil ditambahkan');
             return response()->json([
                 'success' => true,
                 'message' => 'Data kelas berhasil ditambahkan',
@@ -65,7 +64,6 @@ class KelasController extends Controller
             ]);
         }catch(\Exception $e){
             Alert::error('Gagal', 'Data kelas gagal ditambahkan');
-            // return redirect('/datakelas');
         }
     }
 
@@ -116,7 +114,6 @@ class KelasController extends Controller
             $kelas->kelas_guru_wali_id = $request->nama_guru_edit;
             $kelas->save();
             $kelas->fasilitas()->sync($request->kelas_fasilitas_edit);
-            Alert::success('Berhasil', 'Data kelas berhasil diubah');
             return response()->json([
                 'success' => true,
                 'message' => 'Data kelas berhasil diperbarui',

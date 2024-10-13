@@ -34,20 +34,10 @@
         <div class="col-md-12 p-2">
           <label for="jam-mulai" class="form-label">Jam Mulai<span class="text-danger">*</span></label>
           <input type="time" class="form-control" id="jam-mulai" name="jam_mulai">
-          @error('jam-mulai')
-            <div class="invalid-feedback">
-              {{ $message }}
-            </div>
-          @enderror
         </div>
         <div class="col-md-12 p-2">
           <label for="jam-selesai" class="form-label">Jam Selesai<span class="text-danger">*</span></label>
-          <input type="time" class="form-control" id="jam-selesai" name="jam_selesai">
-          @error('jam-selesai')
-            <div class="invalid-feedback">
-              {{ $message }}
-            </div>
-          @enderror
+          <input type="time" class="form-control" id="jam-selesai" name="jam_selesai" onchange="validateTimeEdit()">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -98,7 +88,7 @@
         </div>
         <div class="col-md-12 p-2">
           <label for="jam-selesai-tambah" class="form-label">Jam Selesai<span class="text-danger">*</span></label>
-          <input type="time" class="form-control" id="jam-selesai-tambah" name="jam_selesai_tambah">
+          <input type="time" class="form-control" id="jam-selesai-tambah" name="jam_selesai_tambah" onchange="validateTime()">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

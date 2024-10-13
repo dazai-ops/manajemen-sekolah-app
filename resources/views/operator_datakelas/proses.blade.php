@@ -26,7 +26,6 @@
         event.preventDefault();
         let isEmpty = false;
         let form = $(this).serialize()
-        console.log(form)
 
         $(this).find('input, select').each(function() {
           if($(this).is('select') && $(this).prop('multiple')) {
@@ -48,10 +47,12 @@
                 method: 'POST',
                 data: form,
                 success: function(response){
-                  location.reload()
+                  swallSuccessSaveData()
                 },
                 error: function(err){
-                  console.log(err, 'eror bang')
+                  swallFailedSaveData().then(() => {
+                    $('#kelas-modal-tambah')modal('hide');
+                  })
                 }
               })
             }
@@ -69,7 +70,6 @@
           url: '/datakelas/' + kelasId + '/get-data',
           method: 'GET',
           success: function(response){
-            console.log(response)
             $('#kelas-nama-edit').val(response.data.detail_kelas.kelas_nama)
             $('#nama-guru-edit').val(response.data.detail_kelas.wali_kelas.id)
             fasilitasIds = response.data.fasilitas.map(fasilitas => fasilitas.id)
@@ -98,8 +98,6 @@
     // cek apakah ada perubahan saat submit
     $(document).on('submit', '#kelas-form-edit', function(e) {
       e.preventDefault();
-      console.log($(this).data('original-kelas-nama'))
-
       const form = this;
       let isChanged = false;
       let isEmpty = false;
@@ -121,7 +119,6 @@
       $(form).find('input, select').each(function() {
         const originalValue = $(this).data('original-value');
         const currentValue = $(this).is('select') ? $(this).val() : $(this).val();
-        console.log('awal',originalValue, 'akhir',currentValue)
         if (JSON.stringify(originalValue) !== JSON.stringify(currentValue)) {
           isChanged = true;
         }
@@ -140,10 +137,12 @@
             method: 'PUT',
             data: form,
             success: function(response){
-              location.reload()
+              swallSuccessUpdateData()
             },
             error: function(err){
-              console.log(err, 'eror bang')
+              swallFailedUpdateData().then(() => {
+                $('#kelas-modal-edit').modal('hide');
+              })
             }
           })
         }

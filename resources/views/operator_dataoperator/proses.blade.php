@@ -63,7 +63,7 @@
         return;
       }
 
-      swallConfirmUpdate('Ubah status!', 'Yakin ubah status operator ini?')
+      swallConfirmUpdateJs()
       .then((result) => {
         if (result.isConfirmed) {
           $.ajax({
@@ -75,7 +75,7 @@
               status: statusBaru
             },
             success: function(response){
-              location.reload();
+              swallSuccessUpdateData()
             },
             error: function(){
               swallFailedGetData().then(() => {

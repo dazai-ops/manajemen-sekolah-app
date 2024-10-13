@@ -145,7 +145,6 @@ class OperatorController extends Controller
             $operator = Operator::findOrFail($id);
             $operator->operator_is_aktif = $request->input('status');
             $operator->save();
-            Alert::success('Berhasil', 'Status operator berhasil diubah');
         }catch(\Exception $e){
             Alert::error('Gagal', 'Status operator gagal diubah');
         }

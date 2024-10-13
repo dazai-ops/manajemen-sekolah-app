@@ -8,17 +8,43 @@
         }
     }
 
+    function validateTime(){
+        let jamMulai = $('#jam-mulai-tambah').val();
+        let jamSelesai = $('#jam-selesai-tambah').val();
+        if(jamMulai && jamSelesai){
+            if(jamMulai > jamSelesai){
+                swallInvalidTime().then(() => {
+                    $('#jam-selesai-tambah').val('');
+                });
+                return;
+            }
+        }
+        return true;
+    }
+
+    function validateTimeEdit(){
+        let jamMulai = $('#jam-mulai').val();
+        let jamSelesai = $('#jam-selesai').val();
+        if(jamMulai && jamSelesai){
+            if(jamMulai > jamSelesai){
+                swallInvalidTime().then(() => {
+                    $('#jam-selesai').val('');
+                });
+                return;
+            }
+        }
+        return true;
+    }
+
     $(document).ready(function() {
 
         $(document).on('click', '.jadwal-list-button-edit', function(){
             var jadwalListId = $(this).data('id')
-            console.log('clicked', jadwalListId)
 
             $.ajax({
                 url: '/jadwal-pelajaran-list/' + jadwalListId,
                 method: 'GET',
                 success: function(response){
-                    console.log(response)
                     $('#mata-pelajaran').val(response.data.mapel_id)
                     $('#guru-pengajar').val(response.data.guru_id)
                     $('#jam-mulai').val(response.data.jam_mulai)
@@ -52,7 +78,6 @@
             $(form).find('input, select').each(function() {
                 const originalValue = $(this).data('original-value');
                 const currentValue = $(this).is('select') ? $(this).val() : $(this).val();
-                console.log('awal',originalValue, 'akhir',currentValue)
                 if (JSON.stringify(originalValue) !== JSON.stringify(currentValue)) {
                 isChanged = true;
                 }
@@ -104,7 +129,6 @@
             var hari = button.data('hari')
             $('#kelas-id').val(kelasId)
             $('#hari').val(hari)
-            console.log(kelasId, hari)
         })
 
         $(document).on('submit', '#jadwal-list-form-tambah', function(e){
@@ -157,7 +181,7 @@
             var url = '/jadwal-pelajaran/' + jadwalId;
             var csrfToken = $('meta[name="csrf-token"]').attr('content')
 
-            swallConfirmDelete('Hapus data jadwal!', 'Apakah anda yakin menghapus data ini?', url, csrfToken)
+            swallConfirmDelete('Hapus data!', 'Yakin, hapus data jadwal ini?', url, csrfToken)
             .then((result)=>{
             if(result.isConfirmed){
                 $.ajax({
@@ -167,8 +191,9 @@
                         _token: csrfToken
                     },
                     success: function(response){
-                        swallSuccessDeleteData();
-                        location.reload();
+                        swallSuccessDeleteData().then(() => {
+                            location.reload();
+                        });
                     },
                     error: function(xhr){
                         swallFailedDeleteData();

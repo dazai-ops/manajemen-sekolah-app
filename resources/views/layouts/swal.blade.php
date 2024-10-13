@@ -18,7 +18,7 @@
             }
         });
     }
-    function swallConfirmUpdateJs(formElement){
+    function swallConfirmUpdateJs(){
         return Swal.fire({
           title: 'Ubah data!',
           text: 'Yakin ingin mengubah data ini?',
@@ -40,6 +40,8 @@
           heightAuto: true,
           backdrop: `rgba(0,0,0,0.5)`,
           confirmButtonText: 'Oke'
+        }).then(()=> {
+            location.reload();
         });
     }
     function swallFailedUpdateData(){
@@ -51,7 +53,7 @@
           heightAuto: true,
           backdrop: `rgba(0,0,0,0.5)`,
           confirmButtonText: 'Oke'
-        });
+        })
     }
 
     // Delete
@@ -60,6 +62,9 @@
             title: title,
             text:text,
             icon: 'warning',
+            width: 350,
+            heightAuto: true,
+            backdrop: `rgba(0,0,0,0.5)`,
             showCancelButton: true,
             confirmButtonText: 'Yakin',
             cancelButtonText: 'Batal'
@@ -74,7 +79,9 @@
           heightAuto: true,
           backdrop: `rgba(0,0,0,0.5)`,
           confirmButtonText: 'Oke'
-        });
+        }).then(()=> {
+            location.reload();
+        });;
     }
     function swallFailedDeleteData(){
         return Swal.fire({
@@ -85,7 +92,7 @@
           heightAuto: true,
           backdrop: `rgba(0,0,0,0.5)`,
           confirmButtonText: 'Oke'
-        });
+        })
     }
 
     // Save & store
@@ -141,9 +148,7 @@
           heightAuto: true,
           backdrop: `rgba(0,0,0,0.5)`,
           confirmButtonText: 'Oke'
-        }).then(()=> {
-            location.reload();
-        });
+        })
     }
 
     // Get data
@@ -181,6 +186,18 @@
           heightAuto: true,
           backdrop: `rgba(0,0,0,0.5)`,
           icon: 'warning',
+          confirmButtonText: 'Tutup'
+        });
+    }
+
+    function swallInvalidTime(){
+        return Swal.fire({
+          title: 'Hey..!',
+          text: 'Jam selesai tidak boleh kurang dari jam mulai!',
+          width: 350,
+          heightAuto: true,
+          backdrop: `rgba(0,0,0,0.5)`,
+          icon: 'info',
           confirmButtonText: 'Tutup'
         });
     }

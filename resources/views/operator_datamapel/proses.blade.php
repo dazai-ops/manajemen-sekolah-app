@@ -93,10 +93,12 @@
                 mapel: mapelBaru
               },
               success: function(response){
-                location.reload();
+                swallSuccessSaveData()
               },
               error: function(){
-                console.log('Gagal menambahkan status operator');  
+                swallFailedSaveData().then(() => {
+                  $('#mapel-modal-tambah').modal('hide');
+                })
               }
             })
           }
