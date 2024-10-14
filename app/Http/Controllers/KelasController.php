@@ -147,4 +147,12 @@ class KelasController extends Controller
             ]
         ]);
     }
+
+    public function getWaliKelas(){
+        $waliKelas = Guru::with('kelas')->has('kelas')->get();
+        return view('operator_datakelas.walikelas', [
+            'pageTitle' => 'Wali Kelas',
+            'waliKelas' => $waliKelas
+        ]);
+    }
 }

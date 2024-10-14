@@ -10,6 +10,7 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\JadwalListController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\FasilitasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,9 @@ Route::get('/lorem', function (){
 Route::get('/login', [AuthController::class, 'showLogin'])->middleware('operator.guest')->name('login');
 Route::post('/login', [AuthController::class, 'checkLogin'])->middleware('operator.guest')->name('login.check');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/logout', function(){
+  return redirect('/login');
+});
 
 Route::middleware('operator.auth')->group(function (){
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
@@ -47,11 +51,14 @@ Route::middleware('operator.auth')->group(function (){
     // Siswa
     Route::resource('/datasiswa', SiswaController::class);
     // Jadwal
-    Route::resource('/jadwal-pelajaran', JadwalListController::class);
+  Route::resource('/jadwal-pelajaran', JadwalListController::class);
     Route::get('/jadwal-pelajaran-list/{id}', [JadwalListController::class, 'jadwal_list']);
     // Post
     Route::resource('/post', PostController::class);
     // Kelas
     Route::resource('/datakelas', KelasController::class);
     Route::get('/datakelas/{id}/get-data', [KelasController::class, 'getDataKelas'])->name('datakelas.getdata');
+    Route::get('/walikelas', [KelasController::class, 'getWaliKelas'])->name('walikelas');
+    // Fasilitas Kelas
+    Route::resource('/fasilitas', FasilitasController::class);
 });

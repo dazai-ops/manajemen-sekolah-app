@@ -9,10 +9,10 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link collapsed active" data-bs-target="#components-master" data-bs-toggle="collapse" href="">
+      <a class="nav-link collapsed active" data-bs-target="#menu-master-data" data-bs-toggle="collapse" href="">
         <i class="bi bi-menu-button-wide"></i><span>Master Data</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
-      <ul id="components-master" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <ul id="menu-master-data" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
           <a href="{{ route('dataoperator.index') }}" class="{{ request()->routeIs('dataoperator.*') ? 'active' : '' }}">
             <i class="bi bi-circle"></i><span>Operator</span>
@@ -28,11 +28,35 @@
             <i class="bi bi-circle"></i><span>Siswa</span>
           </a>
         </li>
+      </ul>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link collapsed active" data-bs-target="#menu-master-data-kelas" data-bs-toggle="collapse" href="">
+        <i class="bi bi-buildings"></i></i></i><span>Master Kelas</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="menu-master-data-kelas" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
           <a href="{{ route('datakelas.index') }}" class="{{ request()->routeIs('datakelas.*') ? 'active' : ''}}">
             <i class="bi bi-circle"></i><span>Kelas</span>
           </a>
         </li>
+        <li>
+          <a href="{{ route('fasilitas.index') }}" class="{{ request()->routeIs('fasilitas.*') ? 'active' : ''}}">
+            <i class="bi bi-circle"></i><span>Fasilitas Kelas</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ route('walikelas') }}" class="{{ request()->routeIs('walikelas.*') ? 'active' : ''}}">
+            <i class="bi bi-circle"></i><span>Wali Kelas</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link collapsed active" data-bs-target="#menu-master-data-pelajaran" data-bs-toggle="collapse" href="">
+        <i class="bi bi-journal-text"></i><span>Master Pelajaran</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="menu-master-data-pelajaran" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
           <a href="{{ route('datamapel.index') }}" class="{{ request()->routeIs('datamapel.*') ? 'active' : '' }}">
             <i class="bi bi-circle"></i><span>Mapel</span>
@@ -47,10 +71,10 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#components-event" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-journal-text"></i><span>Events</span><i class="bi bi-chevron-down ms-auto"></i>
+      <a class="nav-link collapsed" data-bs-target="#menu-master-data-events" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-send"></i></i><span>Publikasi & Event</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
-      <ul id="components-event" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <ul id="menu-master-data-events" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
           <a href="components-alerts.html">
             <i class="bi bi-circle"></i><span>Posts</span>
@@ -72,7 +96,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <form action="{{ route('logout') }}" method="POST">
+      <form id="sidebar-logout-form" action="{{ route('logout') }}" method="POST">
         @csrf
         <button type="submit" class="nav-link collapsed">
           <i class="bi bi-box-arrow-right"></i>

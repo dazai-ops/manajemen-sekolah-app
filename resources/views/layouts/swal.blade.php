@@ -189,7 +189,6 @@
           confirmButtonText: 'Tutup'
         });
     }
-
     function swallInvalidTime(){
         return Swal.fire({
           title: 'Hey..!',
@@ -199,6 +198,23 @@
           backdrop: `rgba(0,0,0,0.5)`,
           icon: 'info',
           confirmButtonText: 'Tutup'
+        });
+    }
+    function swallConfirmLogout(formElement){
+        return Swal.fire({
+          title: 'Keluar dari sistem?',
+          text: 'Nanti anda perlu login kembali!',
+          width: 350,
+          heightAuto: true,
+          backdrop: `rgba(0,0,0,0.5)`,
+          icon: 'info',
+          showCancelButton: true,
+          cancelButtonText: 'Batal',
+          confirmButtonText: 'Lanjutkan'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            formElement.submit();
+          }
         });
     }
 </script>

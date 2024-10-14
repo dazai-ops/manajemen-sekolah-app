@@ -22,5 +22,8 @@ class Guru extends Model
         return $this->hasMany(JadwalList::class);
     }
 
+    public function kelas(){
+        return $this->hasMany(Kelas::class, 'kelas_guru_wali_id');
+    }
 
 }

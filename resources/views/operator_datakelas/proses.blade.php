@@ -51,7 +51,7 @@
                 },
                 error: function(err){
                   swallFailedSaveData().then(() => {
-                    $('#kelas-modal-tambah')modal('hide');
+                    $('#kelas-modal-tambah').modal('hide');
                   })
                 }
               })
