@@ -44,6 +44,9 @@ Route::middleware('operator.auth')->group(function (){
     Route::resource('/dataoperator', OperatorController::class);
     Route::get('/dataoperator/{id}/get-status', [OperatorController::class, 'getStatus'])->name('dataoperator.getstatus');
     Route::put('/dataoperator/{id}/set-status', [OperatorController::class, 'updateStatus'])->name('dataoperator.setstatus');
+    Route::get('/profile', [OperatorController::class, 'showProfile'])->name('profile');
+    Route::put('/profile/{id}', [OperatorController::class, 'updateProfile'])->name('profile.update');
+    Route::put('/password/{id}', [OperatorController::class, 'updatePassword'])->name('password.update');
     // Guru
     Route::resource('/dataguru', GuruController::class);
     // Mapel

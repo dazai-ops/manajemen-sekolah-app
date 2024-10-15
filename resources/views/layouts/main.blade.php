@@ -8,7 +8,7 @@
   <title>{{ $pageTitle }}</title>
   @include('layouts.head')
   @include('layouts.swal')
-  @include('layouts.proses')
+  @include('layouts.logout')
 </head>
 
 <body>

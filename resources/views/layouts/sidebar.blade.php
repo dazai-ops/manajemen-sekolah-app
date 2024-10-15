@@ -1,6 +1,7 @@
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
   <ul class="sidebar-nav" id="sidebar-nav">
+    <li class="nav-heading">Pages</li>
     <li class="nav-item">
       <a class="nav-link" href="{{ route('dashboard') }}">
         <i class="bi bi-grid"></i>
@@ -8,11 +9,12 @@
       </a>
     </li>
 
+    <li class="nav-heading">Master</li>
     <li class="nav-item">
       <a class="nav-link collapsed active" data-bs-target="#menu-master-data" data-bs-toggle="collapse" href="">
         <i class="bi bi-menu-button-wide"></i><span>Master Data</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
-      <ul id="menu-master-data" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <ul id="menu-master-data" class="nav-content collapse active" data-bs-parent="#sidebar-nav">
         <li>
           <a href="{{ route('dataoperator.index') }}" class="{{ request()->routeIs('dataoperator.*') ? 'active' : '' }}">
             <i class="bi bi-circle"></i><span>Operator</span>
@@ -70,13 +72,14 @@
       </ul>
     </li>
 
+    <li class="nav-heading">Pages</li>
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#menu-master-data-events" data-bs-toggle="collapse" href="#">
         <i class="bi bi-send"></i></i><span>Publikasi & Event</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="menu-master-data-events" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-          <a href="components-alerts.html">
+          <a href="">
             <i class="bi bi-circle"></i><span>Posts</span>
           </a>
         </li>
@@ -88,9 +91,9 @@
       </ul>
     </li>
 
-    <li class="nav-heading">Pages</li>
+    <li class="nav-heading">Aksi Akun</li>
     <li class="nav-item">
-      <a class="nav-link collapsed" href="#">
+      <a class="nav-link collapsed" href="{{ route('profile')}}">
         <i class="bi bi-person"></i>
         <span>Profile</span>
       </a>
