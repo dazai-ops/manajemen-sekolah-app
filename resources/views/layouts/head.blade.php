@@ -2,7 +2,6 @@
 <meta content="" name="keywords">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <!-- jQuery CDN -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- SweetAlert2 JS -->

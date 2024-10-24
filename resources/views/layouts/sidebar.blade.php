@@ -72,14 +72,14 @@
       </ul>
     </li>
 
-    <li class="nav-heading">Pages</li>
+    {{-- <li class="nav-heading">Pages</li>
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#menu-master-data-events" data-bs-toggle="collapse" href="#">
         <i class="bi bi-send"></i></i><span>Publikasi & Event</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="menu-master-data-events" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-          <a href="">
+          <a href="{{ route('post.index') }}" class="{{ request()->routeIs('posts.*') ? 'active' : ''}}">
             <i class="bi bi-circle"></i><span>Posts</span>
           </a>
         </li>
@@ -89,7 +89,7 @@
           </a>
         </li>
       </ul>
-    </li>
+    </li> --}}
 
     <li class="nav-heading">Aksi Akun</li>
     <li class="nav-item">

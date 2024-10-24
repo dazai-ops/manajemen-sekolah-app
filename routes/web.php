@@ -27,9 +27,6 @@ use App\Http\Controllers\FasilitasController;
 Route::get('/', function (){
   return redirect('/login');
 });
-Route::get('/lorem', function (){
-  return view('404');
-});
 
 Route::get('/login', [AuthController::class, 'showLogin'])->middleware('operator.guest')->name('login');
 Route::post('/login', [AuthController::class, 'checkLogin'])->middleware('operator.guest')->name('login.check');
@@ -39,29 +36,28 @@ Route::get('/logout', function(){
 });
 
 Route::middleware('operator.auth')->group(function (){
-    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-    // Operator
-    Route::resource('/dataoperator', OperatorController::class);
-    Route::get('/dataoperator/{id}/get-status', [OperatorController::class, 'getStatus'])->name('dataoperator.getstatus');
-    Route::put('/dataoperator/{id}/set-status', [OperatorController::class, 'updateStatus'])->name('dataoperator.setstatus');
-    Route::get('/profile', [OperatorController::class, 'showProfile'])->name('profile');
-    Route::put('/profile/{id}', [OperatorController::class, 'updateProfile'])->name('profile.update');
-    Route::put('/password/{id}', [OperatorController::class, 'updatePassword'])->name('password.update');
-    // Guru
-    Route::resource('/dataguru', GuruController::class);
-    // Mapel
-    Route::resource('/datamapel', MapelController::class);
-    // Siswa
-    Route::resource('/datasiswa', SiswaController::class);
-    // Jadwal
+  // Dashboard
+  Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+  // Operator
+  Route::resource('/dataoperator', OperatorController::class);
+  Route::get('/dataoperator/{id}/get-status', [OperatorController::class, 'getStatus'])->name('dataoperator.getstatus');
+  Route::put('/dataoperator/{id}/set-status', [OperatorController::class, 'updateStatus'])->name('dataoperator.setstatus');
+  Route::get('/profile', [OperatorController::class, 'showProfile'])->name('profile');
+  Route::put('/profile/{id}', [OperatorController::class, 'updateProfile'])->name('profile.update');
+  Route::put('/password/{id}', [OperatorController::class, 'updatePassword'])->name('password.update');
+  // Guru
+  Route::resource('/dataguru', GuruController::class);
+  // Mapel
+  Route::resource('/datamapel', MapelController::class);
+  // Siswa
+  Route::resource('/datasiswa', SiswaController::class);
+  // Jadwal
   Route::resource('/jadwal-pelajaran', JadwalListController::class);
-    Route::get('/jadwal-pelajaran-list/{id}', [JadwalListController::class, 'jadwal_list']);
-    // Post
-    Route::resource('/post', PostController::class);
-    // Kelas
-    Route::resource('/datakelas', KelasController::class);
-    Route::get('/datakelas/{id}/get-data', [KelasController::class, 'getDataKelas'])->name('datakelas.getdata');
-    Route::get('/walikelas', [KelasController::class, 'getWaliKelas'])->name('walikelas');
-    // Fasilitas Kelas
-    Route::resource('/fasilitas', FasilitasController::class);
+  Route::get('/jadwal-pelajaran-list/{id}', [JadwalListController::class, 'jadwal_list']);
+  // Kelas
+  Route::resource('/datakelas', KelasController::class);
+  Route::get('/datakelas/{id}/get-data', [KelasController::class, 'getDataKelas'])->name('datakelas.getdata');
+  Route::get('/walikelas', [KelasController::class, 'getWaliKelas'])->name('walikelas');
+  // Fasilitas Kelas
+  Route::resource('/fasilitas', FasilitasController::class);
 });

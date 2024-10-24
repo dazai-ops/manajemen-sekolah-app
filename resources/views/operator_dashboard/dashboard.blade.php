@@ -11,8 +11,8 @@
   </div>
 <div class="section dashboard">
     <div class="row">
-        <div class="col-12">
-            <div class="card info-card revenue-card">
+        <div class="col-md-4">
+            <div class="card info-card customers-card">
                 <div class="card-body">
                 <h5 class="card-title">Total Operator</h5>
                 <div class="d-flex align-items-center">
@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card info-card revenue-card">
                 <div class="card-body">
                 <h5 class="card-title">Total Guru Terdaftar</h5>
@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card info-card revenue-card">
                 <div class="card-body">
                 <h5 class="card-title">Total Siswa Terdaftar</h5>

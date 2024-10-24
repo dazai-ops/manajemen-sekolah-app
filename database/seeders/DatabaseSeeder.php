@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         Operator::factory()->create([
             'operator_is_aktif' => '1',
             'operator_nama' => 'Administrator',
-            'operator_username' => 'administrator',
+            'operator_username' => 'admin',
             'operator_kode' => 'OP-' . strtoupper(Str::random(4)),
             'password' => bcrypt('password'),
             'operator_jenis_kelamin' => '1',
@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
             'operator_alamat' => 'Jalan Patimura 11, Klojen, Malang',
             // 'remember_token' => Str::random(10),
         ]);
+        // Guru::factory(1000)->create();
 
     }
 }
